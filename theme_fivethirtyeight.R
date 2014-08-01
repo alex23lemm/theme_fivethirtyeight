@@ -32,6 +32,9 @@ theme_fivethirtyeight <- function(base_size = 13, base_family = "") {
       panel.background =  element_rect(),
       legend.key =        element_rect(colour = '#DADADA'),
       
+      # Modifiying legend.position
+      legend.position = 'none',
+      
       complete = TRUE
     )
 }
