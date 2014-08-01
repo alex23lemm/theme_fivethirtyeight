@@ -9,7 +9,9 @@
 library(Lahman)
 library(dplyr)
 library(ggplot2)
+library(extrafont)
 source('theme_fivethirtyeight.R')
+
 
 
 # Data processing --------------------------------------------------------------
@@ -27,7 +29,23 @@ trades_by_year <- Batting %>%
   group_by(yearID, lgID) %>%
   summarize(
     numb_of_trades = n()
-    )
+    ) 
+
+# Data plotting ----------------------------------------------------------------
+
+ggplot(trades_by_year, aes(yearID, numb_of_trades, colour = lgID)) +
+  geom_line(size = 0.75) +
+  ggtitle("Number of trades in Major League Baseball (2000 - 2012)") +
+  annotate('text', x = -Inf, y = -Inf, label = 'American League', hjust = -1.8,
+           vjust = -18, colour = '#FE2700', fontface = 'bold') +
+  annotate('text', x = Inf, y = Inf, label = 'National League', hjust = 2, 
+           vjust = 15, colour = '#008FD5', fontface = 'bold') +
+  scale_color_manual(values = c('#FE2700', '#008FD5')) +
+  scale_x_continuous(breaks = seq(2000, 2012, by = 2)) +
+  scale_y_continuous(breaks = seq(140, 300, by = 50)) +
+  theme_fivethirtyeight()
+
+
 
 
 
