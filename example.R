@@ -33,7 +33,8 @@ trades_by_year <- Batting %>%
 # Data plotting ----------------------------------------------------------------
 
 ggplot(trades_by_year, aes(yearID, numb_of_trades, colour = lgID)) +
-  geom_line(size = 0.75) +
+  geom_line(size = 1.2) +
+  geom_point(size = 4) +
   ggtitle("Number of trades in Major League Baseball (2000 - 2012)") +
   annotate('text', x = 2004, y = 190, label = 'American League', 
            colour = '#FE2700', fontface = 'bold') +
