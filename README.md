@@ -9,9 +9,9 @@ The repository contains the following files:
 
 You can install the theme with `source("theme_fivethirtyeight.R")`. Plots created with the 538 ggplot2 theme will look as follows:
 
+![](figures/mlb_trades_2000_2012.png)
 
-
-Below you will find some general discussions which led to the theme design decisions. In addition, we highlight some aspects which cannot be modified with the ggplot2 theming system but which needs be changed in order to make your plots even more 538-like.
+Below you will find some general discussions which led to the theme design decisions. In addition, we highlight some aspects which cannot be modified with the ggplot2 theming system but which should be changed in order to make your plots even more 538-like.
 
 _Note:_ This little project was inspired by [Austin's (Clemens) blog post](http://austinclemens.com/blog/2014/07/03/fivethirtyeight-com-style-graphs-in-ggplot2/) of 538 style graphs in ggplot2. In his blog he modifies the theme object rather than defining a new theme function.
 
@@ -47,10 +47,6 @@ Although fonts could be set in the theming function, we are not leveraging the t
 * Atlas Grotesk
 * Decima Mono
 
-Moreover, the following 538 plot elements cannot be replicated by the ggplot2 theming system:
-* The plot footer which inlcudes the 538 logo and the data source
-* The subtitle using a smaller fonts than the main plot title
-
 
 ## Building the theme function
 
@@ -78,6 +74,18 @@ The x-axis won't show up in red because `axis.line` is set to `element_blank()` 
     theme(axis.line = element_line(colour = 'red'),
           axis.line.y = element_blank())
 
+## Limitations of the 538 theme function
+
+In addtion to calling the 538 theme you have to make use of `scale_x_continuous` and the `scale_y_continuous` function in order to make your plot even more 538-like (Take a look at `example.R`). 
+
+In general, all 538 time series plots start drawing the first x-axis and the first y-axis line in the left corner of the plot. This is not always the case with usual ggplot2 plots. 
+
+Therefore, you have to figure out the limits of the x-axis and y-axis values upfront and set the `breaks` attribute accordingly in the `scale_[xy]_continuous` call. 
+
+Moreover, the following 538 plot elements cannot be replicated by the ggplot2 theming system:
+
+* The plot footer which inlcudes the 538 logo and the data source
+* The subtitle using a smaller fonts than the main plot title
 
 
 
